@@ -9,3 +9,6 @@ I also found the following blog post helpful:
 https://www.miguelgondu.com/blogposts/2024-03-16/when-does-vanilla-gpr-fail/
 
 Note that in our example, the training dataset is quite small, but still contains more samples than dimensions. The example illustrates that GPs with dimension-dependent priors on the lengthscales can be advantageous in the $d=400$ setting.
+
+
+![parity-2000_samples-400_dimensions](https://github.com/user-attachments/assets/121d200a-c4ad-4c51-b16c-aa1dfccb8517)
