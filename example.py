@@ -17,14 +17,15 @@ def cubic(x: torch.Tensor) -> torch.Tensor:
 class MLPLayer(nn.Module):
     def __init__(self, in_features: int, out_features: int):
         '''
-        MLP Layer with GELU activations
+        MLP Layer with ReLU activations
         '''
         super(MLPLayer, self).__init__()
         self.linear = nn.Linear(in_features, out_features, bias = False)
-        self.act = nn.GELU()
+        self.norm = nn.BatchNorm1d(out_features)
+        self.act = nn.ReLU()
 
     def forward(self, x: torch.tensor):
-        return self.act(self.linear(x))
+        return self.act(self.norm(self.linear(x)))
 
 class MLP(nn.Module):
     def __init__(self, in_features: int, hidden_features: int, out_features: int, num_hidden: int):
@@ -115,8 +116,8 @@ num_hidden = 5
 mlp_model = MLP(in_features=d, hidden_features=hidden_features, out_features=1, num_hidden=num_hidden)
 mlp_model.to(device)
 
-weight_decay = 1e-5
-learning_rate = 1e-4
+weight_decay = 1e-1
+learning_rate = 1e-2
 
 # candidate parameters
 param_dict = {pn: p for pn, p in mlp_model.named_parameters()}
